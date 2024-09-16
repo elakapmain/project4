@@ -19,7 +19,7 @@
     <h3>In your cart</h3>
     <ul id="cart"></ul>
         <li v-for="x in cartItems" v-bind:key="x.id">
-            {{ x.name }} {{ x.price }}
+            {{ x.item }} ${{ x.price }} -${{ x.discount }}
             <button @click="itemRemoved(x.id)" class="delete-btn">X</button>
         </li>
 </template>

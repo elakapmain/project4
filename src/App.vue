@@ -7,7 +7,6 @@
     import { computed, ref } from 'vue';
 
     const cartItems = ref([
-        {id: 1, name:'Text1', price:250, discount: 20},
     ]);
 
     const cartDiscounts = computed(() =>{
@@ -26,8 +25,24 @@
         return cartTotal.value - cartDiscounts.value
     })
     
+    // Handle emits from form and buttons
+    const handleAdd = (itemData) => {
+        cartItems.value.push({
+            id: generateID(),
+            item: itemData.item,
+            price: itemData.price,
+            discount: itemData.discount,
+        })
+
+        console.log(cartItems.value)
+    }
+
     const handleRemove = (id) => {
         cartItems.value = cartItems.value.filter((x) => x.id !== id)
+    }
+
+    const generateID = () => {
+        return Math.floor(Math.random()*10000000)
     }
 </script>
 
@@ -35,7 +50,7 @@
     <Header></Header>
     <div class="container">
         <Totals :total="cartTotal" :totalWithDiscounts="discountedTotal" :discounts="cartDiscounts"></Totals>
-        <CartAdd></CartAdd>
+        <CartAdd @itemAdded="handleAdd"></CartAdd>
         <CartList :cartItems="cartItems" @itemRemoved="handleRemove"></CartList>
     </div>
 </template>
