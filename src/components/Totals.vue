@@ -19,10 +19,9 @@
 
 <template>
     <h3>Original Total</h3>
-    <h2 id="total">${{ total }}</h2>
+    <h2 class="totals">${{ total }}</h2>
 
     <h3>With Discounts</h3>
-    <h2 id="applied">${{ totalWithDiscounts }}</h2>
-
-    <h2 id="discounts">You saved ${{ discounts }}!</h2>
+    <h2 class="totals">${{ totalWithDiscounts }}</h2>
+    <h3 class="totals" id="savings" v-if="discounts > 0">You saved ${{ discounts }}!</h3>
 </template>

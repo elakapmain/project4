@@ -50,6 +50,6 @@
             <input type="number" id="discount" v-model="discount" placeholder="Leave blank if none...">
         </div>
 
-        <button class="button" >Add to Cart</button>
+        <button id="add-button" >Add to Cart</button>
     </form>
 </template>
