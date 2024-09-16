@@ -4,10 +4,9 @@
     import CartAdd from './components/CartAdd.vue';
     import CartList from './components/CartList.vue';
 
-    import { computed, ref } from 'vue';
+    import { computed, ref, onMounted } from 'vue';
 
-    const cartItems = ref([
-    ]);
+    const cartItems = ref([]);
 
     const cartDiscounts = computed(() =>{
         return cartItems.value.reduce((sum, x)=>{
@@ -34,16 +33,30 @@
             discount: itemData.discount,
         })
 
-        console.log(cartItems.value)
+        saveToLocalStorage()
     }
 
     const handleRemove = (id) => {
         cartItems.value = cartItems.value.filter((x) => x.id !== id)
+
+        saveToLocalStorage()
     }
 
     const generateID = () => {
         return Math.floor(Math.random()*10000000)
     }
+
+    const saveToLocalStorage = () => {
+        localStorage.setItem('cartItems', JSON.stringify(cartItems.value))    //  Same name as array
+    }
+
+    onMounted(() => {
+        const savedCartItems = JSON.parse(localStorage.getItem('cartItems'))
+
+        if(savedCartItems) {
+            cartItems.value = savedCartItems
+        }
+    })
 </script>
 
 <template>
