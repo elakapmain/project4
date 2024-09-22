@@ -14,7 +14,7 @@
     const onSubmit = () => {
         const itemData = {
             item: item.value,
-            price: parseFloat(price.value),
+            price: Math.abs(parseFloat(price.value)),
             discount: checkBlank(discount.value)
         }
         
