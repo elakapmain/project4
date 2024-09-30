@@ -15,7 +15,7 @@
         const itemData = {
             item: item.value,
             price: Math.abs(parseFloat(price.value)),
-            discount: checkBlank(discount.value)
+            discount: Math.abs(checkBlank(discount.value))
         }
         
         emit('itemAdded', itemData)
